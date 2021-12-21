@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 不会清除用户已经输入的内容 -->
+    <!-- Vue 会尽可能高效地渲染元素，通常会复用已有元素而不是从头开始渲染, 
+        Vue 提供了一种方式来表达“这两个元素是完全独立的，不要复用它们”,
+        添加一个具有唯一值的 key attribute 即可-->
+    <div id="app">
+        <span v-if="isUser">
+            <label for="username">用户账号</label>
+            <input type="text" id="username" placeholder="用户账号" key="username">
+        </span>
+        <span v-else>
+            <label for="email">用户邮箱</label>
+            <input type="text" id="email" placeholder="用户邮箱" key="email">
+        </span>
+        <button @click="isUser = !isUser">切换类型</button>
+    </div>
+
+    <script src="../lib/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                isUser: true
+            }
+        })
+    </script>
+</body>
+
+</html>

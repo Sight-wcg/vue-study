@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <cpn></cpn>
+        <hr>
+        <!-- 在向具名插槽提供内容时，可以在一个 <template> 元素上使用 v-slot 指令，并以 v-slot 的参数的形式提供其名称 -->
+        <cpn>
+            <template v-slot:center>
+                <span style="color: red;">[标题-center]</span>
+            </template>
+        </cpn>
+        <hr>
+        <!--任何没有被包裹在带有 v-slot 的 <template> 中的内容都会被视为默认插槽的内容。-->
+        <cpn>
+            <template v-slot:left>
+                <span style="color: red;">[返回-left]</span>
+            </template>
+            <template v-slot:center>
+                <span style="color: red;">[标题-center]</span>
+            </template>
+            <template v-slot:right>
+                <span style="color: red;">[菜单-right]</span>
+            </template>
+            <p style="margin-left: 60px; color: red;">[内容-default]</p>
+        </cpn>
+        <hr>
+        <!-- 如果你希望更明确一些，仍然可以在一个 <template> 中包裹默认插槽的内容, 一个不带 name 的 <slot> 出口会带有隐含的名字“default-->
+        <cpn>
+            <template v-slot:left>
+                <span style="color: red;">[返回-left]</span>
+            </template>
+            <template v-slot:center>
+                <span style="color: red;">[标题-center]</span>
+            </template>
+            <template v-slot:right>
+                <span style="color: red;">[菜单-right]</span>
+            </template>
+            <template v-slot:default>
+                <p style="margin-left: 60px; color: red;">[内容-default]</p>
+            </template>
+        </cpn>
+
+        <!-- <cpn><span slot="center">标题-center</span></cpn> -->
+        <!-- <cpn><button slot="left">返回-left</button></cpn> -->
+    </div>
+
+
+    <!-- 一个不带 name 的 <slot> 出口会带有隐含的名字“default” -->
+    <template id="cpn">
+        <div>
+            <slot name="left"><span> [默认元素左] </span></slot>
+            <slot name="center"><span> [默认元素中] </span></slot>
+            <slot name="right"><span> [默认元素右] </span></slot>
+            <slot>
+                <p style="margin-left: 60px;"> [默认元素default] </p>
+            </slot>
+        </div>
+    </template>
+
+    <script src="../lib/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {},
+            components: {
+                cpn: {
+                    template: '#cpn'
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>

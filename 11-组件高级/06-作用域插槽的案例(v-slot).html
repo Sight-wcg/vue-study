@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <cpn></cpn>
+        <cpn>
+            <!-- 这里将包含所有插槽 prop 的对象命名为 slotProps，名字自定义 -->
+            <template v-slot:default="slotProps">
+                <span>{{slotProps.data.join(' - ')}}</span>
+            </template>
+        </cpn>
+        <cpn>
+            <!--解构插槽prop  
+                作用域插槽的内部工作原理是将你的插槽内容包裹在一个拥有单个参数的函数里,
+                所以v-solt的值可以是任何能够作为函数的参数的表达式
+             -->
+            <template v-slot:default="{data}">
+                <span>{{data.join(' * ')}}</span>
+            </template>
+        </cpn>
+
+        <!-- v-slot 缩写，即把参数之前的所有内容 (v-slot:) 替换为字符 # -->
+        <cpn>
+            <template #default="{data}">
+                <span>{{data.join(' * ')}}</span>
+            </template>
+        </cpn>
+    </div>
+
+    <!-- 绑定在 <slot> 元素上的 attribute 被称为插槽 prop,名字(:data)自定义-->
+    <template id="cpn">
+        <div>
+            <slot :data="pLanguages">
+                <ul>
+                    <li v-for="item in pLanguages">{{item}}</li>
+                </ul>
+            </slot>
+        </div>
+    </template>
+
+    <script src="../lib/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            components: {
+                cpn: {
+                    template: '#cpn',
+                    data() {
+                        return {
+                            pLanguages: ['JavaScript', 'Python', 'Java', 'Go', 'c++', 'c#', 'swift'],
+                        }
+                    },
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

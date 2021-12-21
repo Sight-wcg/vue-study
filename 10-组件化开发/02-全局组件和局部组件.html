@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <my-cpn></my-cpn>
+        <my-cpn></my-cpn>
+        <cpn></cpn>
+    </div>
+
+    <!-- 全局组件可以在多个Vue实例下使用 -->
+    <div id="app2">
+        <my-cpn></my-cpn>
+        <cpn></cpn>
+    </div>
+
+    <!-- 组件必须挂载在 vue 实例作用范围内下才能生效 -->
+    <my-cpn></my-cpn>
+    <cpn></cpn>
+
+    <script src="../lib/vue.js"></script>
+    <script>
+
+        // 全局组件
+        // 1.创建组件构造器
+        const componentConstructor = Vue.extend({
+            template: `
+                  <div>
+                     <h1>标题</h1>
+                     <p>内容1</p>
+                     <p>内容2</p>
+                  </div>`
+        })
+        // 2.注册组件(全局组件,可以在多个Vue实例下使用)
+        // 全局注册的行为必须在根 Vue 实例(通过 new Vue) 创建之前发生
+        // Vue.component('my-cpn', componentConstructor);
+
+        // 注册局部组件
+        const app = new Vue({
+            el: '#app',
+            data: {},
+            components: {
+                // cpn 组件的标签名
+                cpn: componentConstructor,
+            },
+        });
+
+        const app2 = new Vue({
+            el: '#app2',
+            data: {},
+            methods: {}
+        });
+    </script>
+</body>
+
+</html>

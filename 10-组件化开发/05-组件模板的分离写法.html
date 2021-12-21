@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <cpn1></cpn1>
+        <cpn2></cpn2>
+    </div>
+
+
+    <!-- 组件模板的两种写法 -->
+    <!-- 1.第一种写法 script 标签， 注意：类型必须为 text/x-template -->
+    <script type="text/x-template" id="cpn1">
+        <div>
+            <h1>标题1</h1>
+            <p>内容1</p>
+        </div>
+    </script>
+
+    <!-- 2.第二种写法 template 标签 -->
+    <template id="cpn2">
+        <div>
+            <h1>标题2</h1>
+            <p>内容2</p>
+        </div>
+    </template>
+
+    <script src="../lib/vue.js"></script>
+    <script>
+        // 1.注册全局组件(分离写法)
+        Vue.component('cpn1', {
+            template: '#cpn1',
+        });
+
+        const app = new Vue({
+            el: '#app',
+            data: {},
+            // 注册局部组件(分离写法)
+            components: {
+                cpn2: { template: '#cpn2' },
+            }
+        });
+    </script>
+</body>
+
+</html>

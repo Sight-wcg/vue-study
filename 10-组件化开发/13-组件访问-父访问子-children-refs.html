@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <cpn></cpn>
+        <cpn></cpn>
+        <cpn ref="aaa"></cpn>
+        <button @click="btnClick">按钮$children</button>
+        <button @click="btnClick2">按钮$refs</button>
+    </div>
+
+    <template id="cpn">
+        <div><span>这里是子组件</span></div>
+    </template>
+    <script src="../lib/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {},
+            methods: {
+                btnClick() {
+                    //1. $children
+                    console.log(this.$children);
+                    // this.$children[0].showMessage();
+                    for (let cpn of this.$children) {
+                        console.log('🚀  ->  btnClick  ->  cpn.name', cpn.name);
+                        console.log('🚀  ->  btnClick  ->  cpn.showMessage()', cpn.showMessage());
+                    }
+                },
+                btnClick2() {
+                    console.log('🚀  ->   btnClick2  ->  this.$refs', this.$refs); // 对象类型,默认是空 {}
+                    console.log('🚀  ->   btnClick2  ->  this.$refs.aaa', this.$refs.aaa); // 组件
+                },
+            },
+            components: {
+                cpn: {
+                    template: '#cpn',
+                    data() {
+                        return {
+                            name: '组件name',
+                        }
+                    },
+                    methods: {
+                        showMessage() {
+                            console.log('🚀  ->  showMessage()');
+                        },
+                    },
+                },
+            },
+        });
+    </script>
+</body>
+
+    </html>

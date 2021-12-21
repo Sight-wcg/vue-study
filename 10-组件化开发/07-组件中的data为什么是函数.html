@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <cpn></cpn>
+        <cpn></cpn>
+        <cpn></cpn>
+
+        <p>------------------------</p>
+
+        <cpn2></cpn2>
+        <cpn2></cpn2>
+        <cpn2></cpn2>
+    </div>
+
+    <template id="cpn">
+        <div>
+            <p>当前计数：{{num}}</p>
+            <button @click="increment">+</button>
+            <button @click="decrement">-</button>
+        </div>
+    </template>
+
+    <template id="cpn2">
+        <div>
+            <p>当前计数：{{num}}</p>
+            <button @click="increment">+</button>
+            <button @click="decrement">-</button>
+        </div>
+    </template>
+
+    <script src="../lib/vue.js"></script>
+    <script>
+        // 1.注册组件
+        Vue.component('cpn', {
+            template: '#cpn',
+            data() {
+                return {
+                    num: 0
+                }
+            },
+            methods: {
+                increment() {
+                    this.num++;
+                },
+                decrement() {
+                    this.num--;
+                }
+            },
+        });
+
+        const obj = {
+            num: 0
+        }
+        Vue.component('cpn2', {
+            template: '#cpn2',
+            data() {
+                return obj;
+            },
+            methods: {
+                increment() {
+                    this.num++;
+                },
+                decrement() {
+                    this.num--;
+                }
+            },
+        });
+        const app = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+        });
+    </script>
+</body>
+
+</html>

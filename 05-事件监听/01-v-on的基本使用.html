@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2>{{count}}</h2>
+
+        <!-- <button v-on:click="count++">+</button> -->
+        <!-- <button v-on:click="count--">-</button> -->
+
+        <button v-on:click="increment">+</button>
+        <button v-on:click="decrement">-</button>
+
+        <button @click="increment">+</button>
+        <button @click="decrement">-</button>
+    </div>
+
+    <script src="../lib/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                count: 0
+            },
+            methods: {
+                increment: function () {
+                    this.count++;
+                },
+                decrement: function () {
+                    this.count--;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

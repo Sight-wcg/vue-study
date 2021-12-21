@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <my-cpn></my-cpn>
+        <my-cpn></my-cpn>
+        <div>
+            <my-cpn></my-cpn>
+        </div>
+    </div>
+
+    <!-- 组件必须挂载在 vue 实例作用范围内下才能生效 -->
+    <my-cpn></my-cpn>
+
+    <script src="../lib/vue.js"></script>
+    <script>
+        // 1.创建组件构造器
+        // 注意这里写模板字符串使用了 ` 反引号，如果用引号，换行要用 + 拼接
+        const componentConstructor = Vue.extend({
+            template: `
+              <div>
+                 <h1>标题</h1>
+                 <p>内容1</p>
+                 <p>内容2</p>
+              </div>`
+        })
+
+        // 2.注册组件
+        Vue.component('my-cpn', componentConstructor);
+
+        const app = new Vue({
+            el: '#app',
+            data: {},
+            methods: {}
+        });
+    </script>
+</body>
+
+</html>
